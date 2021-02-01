@@ -1,0 +1,24 @@
+@mixin grid {
+  display: grid;
+  grid-template-columns: 5px repeat(7, 1fr) 85px;
+  align-items: center;
+  column-gap: 10px;
+  grid-auto-rows: 65px;
+}
+
+.products-view-container{
+  .legend-container {
+    @include grid;
+  }
+  .product-view-container {
+    @include grid;
+    background-color: rgb(243, 243, 243);
+    &:hover {
+      background-color: rgb(245, 228, 241);
+    }
+    div {
+      overflow: hidden;
+      word-wrap: break-word;
+    }
+  }
+}
