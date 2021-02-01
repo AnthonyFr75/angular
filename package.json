@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "e2e": "ng e2e",
-    "lint": "eslint . --ext .ts --fix"
+    "lint": "eslint . --ext .ts --fix",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {

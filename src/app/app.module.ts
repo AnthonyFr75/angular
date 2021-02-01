@@ -7,6 +7,9 @@ import { ProductViewComponent } from './products/product-view/product-view.compo
 import { ProductUpdateComponent } from './products/product-update/product-update.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductUpdateComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
+    MatButtonModule,
     BrowserAnimationsModule
   ],
   providers: [],

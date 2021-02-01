@@ -8,6 +8,7 @@
     <div> Rating </div>
     <div> Warranty years </div>
     <div> Available </div>
+    <div> Actions </div>
   </div>
   <div class="product-view-container" *ngFor="let product of products">
     <div></div>
@@ -18,6 +19,7 @@
     <div>{{ product.rating }}</div>
     <div>{{ product.warranty_years }}</div>
     <div>{{ product.available }}</div>
+    <div> <button mat-raised-button color="primary">Update</button> </div>
     <div> <button mat-raised-button color="primary">Delete</button> </div>
   </div>
 </div>
