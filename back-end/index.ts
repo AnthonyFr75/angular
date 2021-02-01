@@ -45,6 +45,28 @@ app.post("/product", (req, res, next) => {
   });
 });
 
+app.put("/product/:id", (req, res, next) => {
+  const product = new Product({
+    name: 'String',
+    type: 'String',
+    phone: 'String',
+    price: 2,
+    rating: 1,
+    warranty_years: 5,
+    available: true
+  });
+  Product.updateOne({ _id: 'coucou' }, product).then(result => {
+    res.status(200).json({message: "Update successful !"})
+  });
+});
+
+app.delete("/product/:id", (req, res, next) => {
+  Product.deleteOne({ _id: req.params.id }).then(result => {
+    res.status(200).json({message: "Product Deleted !"});
+    // res.status(400).json({message: "Product Deletion failed !"});
+  });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
-})
+});
