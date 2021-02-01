@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductViewComponent } from './products/product-view/product-view.component';
 import { ProductUpdateComponent } from './products/product-update/product-update.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ProductUpdateComponent } from './products/product-update/product-update
     ProductUpdateComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
