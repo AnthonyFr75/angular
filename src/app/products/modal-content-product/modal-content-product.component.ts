@@ -10,7 +10,6 @@ export class ModalContentProductComponent implements OnInit {
   private phoneInternationalRegex = new RegExp(/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/);
 
   public productGroup = new FormGroup({
-    id: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
     phone: new FormControl('', [Validators.pattern(this.phoneInternationalRegex), Validators.required]),
@@ -22,7 +21,13 @@ export class ModalContentProductComponent implements OnInit {
 
   public productKeys = Object.keys(this.productGroup.controls);
 
+  public formvalid = true;
+
   public ngOnInit(): void {
     this.productGroup.valueChanges.subscribe(f => console.log(f))
+  }
+
+  public validateForm(): void {
+    this.formvalid = this.productGroup.valid;
   }
 }

@@ -18,5 +18,8 @@
       </div>
     </div>
   </div>
-  <button mat-raised-button color="primary">Valider</button>
+  <button mat-raised-button color="primary" (click)="validateForm()">Valider</button>
+  <div class="error-message" *ngIf="!formvalid">
+    Invalid Formular
+  </div>
 </div>
