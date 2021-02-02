@@ -9,4 +9,9 @@ export interface Product {
   available: boolean;
 }
 
+export interface ProductModal {
+  product: Product | null;
+  action: 'update' | 'add';
+}
+
 export type Products = Product[];

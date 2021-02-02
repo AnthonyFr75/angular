@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, Products } from "./products.model";
+import { Product, ProductModal, Products } from "./products.model";
 import { MatDialog } from '@angular/material/dialog';
 import { ModalContentProductComponent } from './modal-content-product/modal-content-product.component';
 
@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
     price: 2,
     rating: 1,
     warranty_years: 5,
-    available: true
+    available: false
   };
 
   public products: Products;
@@ -39,18 +39,28 @@ export class ProductsComponent implements OnInit {
     this.products = [this.product1, this.product2];
   }
 
-  public openDialog(data: {product: Product} | null): void {
+  public openDialog(data: ProductModal): void {
     const dialogRef = this.dialog.open(ModalContentProductComponent, {
       width: '300px',
       data: data
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+    dialogRef.afterClosed().subscribe((result: ProductModal) => {
+      const product = result?.product;
+      switch(result?.action) {
+        case 'update':
+          this.products = this.products.map(p => p.id === product.id ? product : p);
+          break;
+        case 'add':
+          this.products.push(product);
+          break;
+        default:
+          console.log('no click');
+      }
     });
   }
 
   public updateProduct(product: Product): void {
-    this.openDialog({product: product});
+    this.openDialog({product: product, action: 'update'});
   }
 
   public deleteProduct(product: Product): void {

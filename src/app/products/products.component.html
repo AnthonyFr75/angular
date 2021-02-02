@@ -1,5 +1,10 @@
 <div class="products-container">
-  <button mat-raised-button color="primary" (click)="openDialog(null)">Add Product</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="openDialog({product: null, action: 'add'})">
+    Add Product
+  </button>
   <app-product-view
     (update)="updateProduct($event)"
     (delete)="deleteProduct($event)"

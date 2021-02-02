@@ -1,14 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Product } from '../products.model';
+import {  ProductModal } from '../products.model';
 
 @Component({
   selector: 'app-modal-content-product',
   templateUrl: './modal-content-product.component.html',
   styleUrls: ['./modal-content-product.component.scss']
 })
-export class ModalContentProductComponent implements OnInit {
+export class ModalContentProductComponent {
   private phoneInternationalRegex = new RegExp(/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/);
 
   public productGroup = new FormGroup({
@@ -22,21 +22,28 @@ export class ModalContentProductComponent implements OnInit {
   });
 
   public productKeys = Object.keys(this.productGroup.controls);
-
+  public id = -1;
   public formvalid = true;
+  public action: string;
 
   constructor(
     public dialogRef: MatDialogRef<ModalContentProductComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {product: Product} | null) {
-      const product = data?.product;
+    @Inject(MAT_DIALOG_DATA) public data: ProductModal) {
+      const product = data.product;
+      if (product?.id) this.id = product?.id;
       product && this.productGroup.patchValue(product);
+      this.action = data.action;
   }
 
-  public ngOnInit(): void {
-    this.productGroup.valueChanges.subscribe(f => console.log(f))
+  public toUpperCase(name: string): string {
+    return name.toUpperCase();
   }
 
   public validateForm(): void {
     this.formvalid = this.productGroup.valid;
+    this.dialogRef.close({
+      product: { id: this.id, ...this.productGroup.value},
+      action: this.action
+    });
   }
 }
