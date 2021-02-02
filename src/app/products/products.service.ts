@@ -20,7 +20,6 @@ export class ProductsService {
             id: product._id,
             name: product.name,
             type: product.type,
-            phone: product.phone,
             price: product.price,
             rating: product.rating,
             warranty_years: product.warranty_years,
@@ -42,7 +41,6 @@ export class ProductsService {
     const body = new HttpParams()
       .set('name', product.name)
       .set('type', product.type)
-      .set('phone', product.phone)
       .set('price', product.price.toString())
       .set('rating', product.rating.toString())
       .set('warranty_years', product.warranty_years.toString())

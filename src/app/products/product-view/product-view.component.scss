@@ -8,7 +8,7 @@
 .products-view-container{
   .legend-container {
     @include grid;
-    grid-template-columns: 5px repeat(7, 1fr) 180px;
+    grid-template-columns: 5px repeat(6, 1fr) 180px;
     :last-child {
       text-align: center;
       margin-right: 11px;
@@ -18,7 +18,7 @@
   }
   .product-view-container {
     @include grid;
-    grid-template-columns: 5px repeat(7, 1fr) 85px 85px;
+    grid-template-columns: 5px repeat(6, 1fr) 85px 85px;
     background-color: rgb(243, 243, 243);
     &:hover {
       background-color: rgb(245, 228, 241);

@@ -2,7 +2,6 @@ export interface Product {
   id: string;
   name: string;
   type: string;
-  phone: string;
   price: number;
   rating: number;
   warranty_years: number;
@@ -13,7 +12,6 @@ export interface ProductMongoFormat {
   _id: string;
   name: string;
   type: string;
-  phone: string;
   price: number;
   rating: number;
   warranty_years: number;

@@ -33,7 +33,6 @@ app.post("/product", (req, res) => {
   const product = new Product({
     name: req.body.name,
     type: req.body.type,
-    phone: req.body.phone,
     price: req.body.price,
     rating: req.body.rating,
     warranty_years: req.body.warranty_years,
@@ -51,7 +50,6 @@ app.put("/product/:id", (req, res) => {
   const product = new Product({
     name: req.body.name,
     type: req.body.type,
-    phone: req.body.phone,
     price: req.body.price,
     rating: req.body.rating,
     warranty_years: req.body.warranty_years,
@@ -68,6 +66,4 @@ app.delete("/product/:id", (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-});
+app.listen(port);
