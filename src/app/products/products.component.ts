@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product, ProductModal, Products } from "./products.model";
 import { MatDialog } from '@angular/material/dialog';
 import { ModalContentProductComponent } from './modal-content-product/modal-content-product.component';
+import { ProductsService } from "./products.service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -31,12 +33,15 @@ export class ProductsComponent implements OnInit {
     available: false
   };
 
+  public products$: Observable<Products>;
   public products: Products;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private productsService: ProductsService) {}
 
   public ngOnInit(): void {
     this.products = [this.product1, this.product2];
+    this.productsService.getProducts();
+    this.products$ = this.productsService.getProductsUpdateListener();
   }
 
   public openDialog(data: ProductModal): void {
@@ -51,7 +56,7 @@ export class ProductsComponent implements OnInit {
           this.products = this.products.map(p => p.id === product.id ? product : p);
           break;
         case 'add':
-          this.products.push(product);
+          this.productsService.addProduct(product);
           break;
         default:
           console.log('no click');

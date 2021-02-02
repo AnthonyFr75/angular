@@ -8,6 +8,6 @@
   <app-product-view
     (update)="updateProduct($event)"
     (delete)="deleteProduct($event)"
-    [products]="products">
+    [products]="products$ | async">
   </app-product-view>
 </div>
