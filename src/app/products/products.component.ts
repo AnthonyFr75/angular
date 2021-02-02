@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductModal, Products } from "./products.model";
+import { Product, ProductModal, Products } from './products.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalContentProductComponent } from './modal-content-product/modal-content-product.component';
-import { ProductsService } from "./products.service";
+import { ProductsService } from './products.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -23,11 +23,11 @@ export class ProductsComponent implements OnInit {
   public openDialog(data: ProductModal): void {
     const dialogRef = this.dialog.open(ModalContentProductComponent, {
       width: '400px',
-      data: data
+      data
     });
     dialogRef.afterClosed().subscribe((result: ProductModal) => {
       const product = result?.product;
-      switch(result?.action) {
+      switch (result?.action) {
         case 'update':
           this.productsService.updateProduct(product);
           break;
@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit {
   }
 
   public updateProduct(product: Product): void {
-    this.openDialog({product: product, action: 'update'});
+    this.openDialog({product, action: 'update'});
   }
 
   public deleteProduct(product: Product): void {

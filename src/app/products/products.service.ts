@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable, Subject, Subscription } from "rxjs";
-import { map } from "rxjs/operators";
-import { Product, ProductMongoFormat, Products } from "./products.model";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Product, ProductMongoFormat, Products } from './products.model';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ProductsService {
   private products: Products = [];
   private productsUpdated  = new Subject<Products>();
@@ -13,7 +13,7 @@ export class ProductsService {
 
   public getProducts(): Subscription {
     return this.http
-      .get("http://localhost:3000/products")
+      .get('http://localhost:3000/products')
       .pipe(map((data: {products: ProductMongoFormat[], message: string}) => {
         return data?.products.map(product => {
           return {
@@ -25,8 +25,8 @@ export class ProductsService {
             rating: product.rating,
             warranty_years: product.warranty_years,
             available: product.available,
-          }
-        })
+          };
+        });
       })
       ).subscribe((products: Products) => {
         this.products = products;
@@ -48,7 +48,7 @@ export class ProductsService {
       .set('warranty_years', product.warranty_years.toString())
       .set('available', product.available.toString());
     this.http
-      .post("http://localhost:3000/product", body)
+      .post('http://localhost:3000/product', body)
       .subscribe((productResponse: {message: string, productId: string}) => {
         product.id = productResponse.productId;
         this.products.push(product);
@@ -58,7 +58,7 @@ export class ProductsService {
 
   public updateProduct(product: Product): void {
     this.http
-      .put("http://localhost:3000/product/" + product.id, product)
+      .put('http://localhost:3000/product/' + product.id, product)
       .subscribe(() => {
         const updateProduct = [...this.products];
         const oldProductIndex = updateProduct.findIndex(p => p.id === product.id);
@@ -70,7 +70,7 @@ export class ProductsService {
 
   public deleteProduct(productId: string): void {
     this.http
-      .delete("http://localhost:3000/product/" + productId)
+      .delete('http://localhost:3000/product/' + productId)
       .subscribe(() => {
         const updateProduct = this.products.filter(p => p.id !== productId);
         this.products = updateProduct;

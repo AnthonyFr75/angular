@@ -18,12 +18,12 @@ export class ModalContentProductComponent {
     phone: new FormControl('', [Validators.pattern(this.phoneInternationalRegex), Validators.required]),
     price: new FormControl(0, [Validators.pattern('([0-9]*[.])?[0-9]+'), Validators.required]),
     rating: new FormControl(0, [Validators.pattern(this.zeroto5regex), Validators.required]),
-    warranty_years: new FormControl(0, [Validators.pattern('^[1-9][0-9]?$|^100$'), Validators.required]),
+    warranty_years: new FormControl(0, [Validators.pattern('^[0-9][0-9]?$|^100$'), Validators.required]),
     available: new FormControl(false)
   });
 
   public productKeys = Object.keys(this.productGroup.controls);
-  public id = "-1";
+  public id = '-1';
   public formvalid = true;
   public action: string;
   public product: Product;
@@ -32,7 +32,7 @@ export class ModalContentProductComponent {
     public dialogRef: MatDialogRef<ModalContentProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductModal) {
       this.product = data.product;
-      if (this.product?.id) this.id = this.product?.id;
+      if (this.product?.id) { this.id = this.product?.id; }
       this.product && this.productGroup.patchValue(this.product);
       this.action = data.action;
   }
