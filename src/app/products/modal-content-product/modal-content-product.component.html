@@ -1,32 +1,22 @@
 <div class="modal-content-product-container">
-  <div [formGroup]="productGroup">
-    <div>
-      <div> name </div>
-      <input type="text" formControlName="name" required>
-    </div>
-    <div>
-      <div> type </div>
-      <input type="text" formControlName="type" required>
-    </div>
-    <div>
-      <div> phone </div>
-      <input type="text" formControlName="phone" required>
-    </div>
-    <div>
-      <div> price </div>
-      <input type="text" formControlName="price" required>
-    </div>
-    <div>
-      <div> rating </div>
-      <input type="text" formControlName="rating" required>
-    </div>
-    <div>
-      <div> warranty_years </div>
-      <input type="text" formControlName="warranty_years" required>
-    </div>
-    <div>
-      <div> available </div>
-      <input type="text" formControlName="available" required>
+  <div [formGroup]="productGroup" class=form-group>
+    <div *ngFor="let productKey of productKeys">
+      <div [ngSwitch]="productKey === 'available'">
+        <div *ngSwitchCase="true" class="radio-group-container">
+          <div class="title-radio">available</div>
+          <mat-radio-group formControlName="{{ productKey }}" class="radio-group">
+            <mat-radio-button [value]="true">True</mat-radio-button>
+            <mat-radio-button [value]="false">False</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div *ngSwitchCase="false">
+          <mat-form-field appearance="standard">
+            <mat-label> {{ productKey }} </mat-label>
+            <input matInput formControlName="{{ productKey }}">
+          </mat-form-field>
+        </div>
+      </div>
     </div>
   </div>
+  <button mat-raised-button color="primary">Valider</button>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-content-product',
@@ -7,19 +7,22 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./modal-content-product.component.scss']
 })
 export class ModalContentProductComponent implements OnInit {
+  private phoneInternationalRegex = new RegExp(/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/);
 
   public productGroup = new FormGroup({
-    id: new FormControl(''),
-    name: new FormControl(''),
-    type: new FormControl(''),
-    phone: new FormControl(''),
-    price: new FormControl(0),
-    rating: new FormControl(0),
-    warranty_years: new FormControl(0),
+    id: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    type: new FormControl('', Validators.required),
+    phone: new FormControl('', [Validators.pattern(this.phoneInternationalRegex), Validators.required]),
+    price: new FormControl(0, [Validators.pattern('^[0-9]*$'), Validators.required]),
+    rating: new FormControl(0, [Validators.pattern('^[0-5]$'), Validators.required]),
+    warranty_years: new FormControl(0, [Validators.pattern('^[1-9][0-9]?$|^100$'), Validators.required]),
     available: new FormControl(false)
   });
 
+  public productKeys = Object.keys(this.productGroup.controls);
+
   public ngOnInit(): void {
-    console.log(Object.keys(this.productGroup.controls)[0])
+    this.productGroup.valueChanges.subscribe(f => console.log(f))
   }
 }

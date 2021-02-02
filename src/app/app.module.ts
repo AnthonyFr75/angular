@@ -10,6 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { ModalContentProductComponent } from './products/modal-content-product/modal-content-product.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     ModalContentProductComponent
   ],
   imports: [
+    MatRadioModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     CommonModule,
     BrowserModule,
     MatButtonModule,
