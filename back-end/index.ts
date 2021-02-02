@@ -20,7 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/products", (req, res, next) => {
+app.get("/products", (req, res) => {
   Product.find().then((documents) => {
     res.status(200).json({
       message: "Products fetched successfully!",
@@ -29,7 +29,7 @@ app.get("/products", (req, res, next) => {
   });
 });
 
-app.post("/product", (req, res, next) => {
+app.post("/product", (req, res) => {
   const product = new Product({
     name: req.body.name,
     type: req.body.type,
@@ -47,7 +47,7 @@ app.post("/product", (req, res, next) => {
   });
 });
 
-app.put("/product/:id", (req, res, next) => {
+app.put("/product/:id", (req, res) => {
   const product = new Product({
     name: req.body.name,
     type: req.body.type,
@@ -57,12 +57,12 @@ app.put("/product/:id", (req, res, next) => {
     warranty_years: req.body.warranty_years,
     available: req.body.available
   });
-  Product.updateOne({ _id: req.body.id }, product).then(result => {
+  Product.updateOne({ _id: req.body.id }, product).then(() => {
     res.status(200).json({message: "Update successful !"})
   });
 });
 
-app.delete("/product/:id", (req, res, next) => {
+app.delete("/product/:id", (req, res) => {
   Product.deleteOne({ _id: req.params.id }).then(() => {
     res.status(200).json({message: "Product Deleted !"});
   });

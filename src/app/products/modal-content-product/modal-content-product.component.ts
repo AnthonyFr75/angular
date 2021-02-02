@@ -10,13 +10,14 @@ import { Product, ProductModal } from '../products.model';
 })
 export class ModalContentProductComponent {
   private phoneInternationalRegex = new RegExp(/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/);
+  private zeroto5regex = new RegExp(/^(([0-4]*[.]*(\.\d+)|[5]|[0-4])?|1(\.0+)?)$/);
 
   public productGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     type: new FormControl('', Validators.required),
     phone: new FormControl('', [Validators.pattern(this.phoneInternationalRegex), Validators.required]),
-    price: new FormControl(0, [Validators.pattern('^[0-9]*$'), Validators.required]),
-    rating: new FormControl(0, [Validators.pattern('^[0-5]$'), Validators.required]),
+    price: new FormControl(0, [Validators.pattern('([0-9]*[.])?[0-9]+'), Validators.required]),
+    rating: new FormControl(0, [Validators.pattern(this.zeroto5regex), Validators.required]),
     warranty_years: new FormControl(0, [Validators.pattern('^[1-9][0-9]?$|^100$'), Validators.required]),
     available: new FormControl(false)
   });
@@ -42,7 +43,7 @@ export class ModalContentProductComponent {
 
   public validateForm(): void {
     this.formvalid = this.productGroup.valid;
-    this.dialogRef.close({
+    this.formvalid && this.dialogRef.close({
       product: { id: this.id, ...this.productGroup.value},
       action: this.action
     });
