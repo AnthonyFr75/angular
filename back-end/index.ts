@@ -4,11 +4,10 @@ import * as mongoose from 'mongoose';
 import Product from './model/product';
 import * as bodyParser from 'body-parser';
 
-
 const app = express();
 const port = 3000;
 const uri =
-    "mongodb+srv://??:?@cluster0.idw05.mongodb.net/test?retryWrites=true&w=majority";
+    "mongodb+srv://??:??@cluster0.idw05.mongodb.net/test?retryWrites=true&w=majority";
 
 mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true})
     .then(() => console.log('ok'))
@@ -50,15 +49,15 @@ app.post("/product", (req, res, next) => {
 
 app.put("/product/:id", (req, res, next) => {
   const product = new Product({
-    name: 'String',
-    type: 'String',
-    phone: 'String',
-    price: 2,
-    rating: 1,
-    warranty_years: 5,
-    available: true
+    name: req.body.name,
+    type: req.body.type,
+    phone: req.body.phone,
+    price: req.body.price,
+    rating: req.body.rating,
+    warranty_years: req.body.warranty_years,
+    available: req.body.available
   });
-  Product.updateOne({ _id: 'coucou' }, product).then(result => {
+  Product.updateOne({ _id: req.body.id }, product).then(result => {
     res.status(200).json({message: "Update successful !"})
   });
 });

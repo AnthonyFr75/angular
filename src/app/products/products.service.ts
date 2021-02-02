@@ -56,6 +56,18 @@ export class ProductsService {
       });
   }
 
+  public updateProduct(product: Product): void {
+    this.http
+      .put("http://localhost:3000/product/" + product.id, product)
+      .subscribe(() => {
+        const updateProduct = [...this.products];
+        const oldProductIndex = updateProduct.findIndex(p => p.id === product.id);
+        updateProduct[oldProductIndex] = product;
+        this.products = updateProduct;
+        this.productsUpdated.next([...this.products]);
+      });
+  }
+
   public deleteProduct(productId: number): void {
     this.http
       .delete("http://localhost:3000/product/" + productId)
