@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   type: string;
   phone: string;
@@ -10,7 +10,7 @@ export interface Product {
 }
 
 export interface ProductMongoFormat {
-  _id: number;
+  _id: string;
   name: string;
   type: string;
   phone: string;

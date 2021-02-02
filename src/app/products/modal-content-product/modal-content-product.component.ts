@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {  ProductModal } from '../products.model';
+import { Product, ProductModal } from '../products.model';
 
 @Component({
   selector: 'app-modal-content-product',
@@ -22,16 +22,17 @@ export class ModalContentProductComponent {
   });
 
   public productKeys = Object.keys(this.productGroup.controls);
-  public id = -1;
+  public id = "-1";
   public formvalid = true;
   public action: string;
+  public product: Product;
 
   constructor(
     public dialogRef: MatDialogRef<ModalContentProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductModal) {
-      const product = data.product;
-      if (product?.id) this.id = product?.id;
-      product && this.productGroup.patchValue(product);
+      this.product = data.product;
+      if (this.product?.id) this.id = this.product?.id;
+      this.product && this.productGroup.patchValue(this.product);
       this.action = data.action;
   }
 

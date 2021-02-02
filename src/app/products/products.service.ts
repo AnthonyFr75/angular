@@ -50,7 +50,7 @@ export class ProductsService {
     this.http
       .post("http://localhost:3000/product", body)
       .subscribe((productResponse: {message: string, productId: string}) => {
-        product.id = +productResponse.productId;
+        product.id = productResponse.productId;
         this.products.push(product);
         this.productsUpdated.next([...this.products]);
       });
@@ -68,7 +68,7 @@ export class ProductsService {
       });
   }
 
-  public deleteProduct(productId: number): void {
+  public deleteProduct(productId: string): void {
     this.http
       .delete("http://localhost:3000/product/" + productId)
       .subscribe(() => {
