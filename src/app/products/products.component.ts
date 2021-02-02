@@ -69,6 +69,6 @@ export class ProductsComponent implements OnInit {
   }
 
   public deleteProduct(product: Product): void {
-    this.products = this.products.filter(p => p.id !== product.id)
+    this.productsService.deleteProduct(product.id);
   }
 }

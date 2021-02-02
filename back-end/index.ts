@@ -8,7 +8,7 @@ import * as bodyParser from 'body-parser';
 const app = express();
 const port = 3000;
 const uri =
-    "mongodb+srv://??:??@cluster0.idw05.mongodb.net/test?retryWrites=true&w=majority";
+    "mongodb+srv://??:?@cluster0.idw05.mongodb.net/test?retryWrites=true&w=majority";
 
 mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true})
     .then(() => console.log('ok'))
@@ -64,9 +64,8 @@ app.put("/product/:id", (req, res, next) => {
 });
 
 app.delete("/product/:id", (req, res, next) => {
-  Product.deleteOne({ _id: req.params.id }).then(result => {
+  Product.deleteOne({ _id: req.params.id }).then(() => {
     res.status(200).json({message: "Product Deleted !"});
-    // res.status(400).json({message: "Product Deletion failed !"});
   });
 });
 

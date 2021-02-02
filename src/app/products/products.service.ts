@@ -55,4 +55,14 @@ export class ProductsService {
         this.productsUpdated.next([...this.products]);
       });
   }
+
+  public deleteProduct(productId: number): void {
+    this.http
+      .delete("http://localhost:3000/product/" + productId)
+      .subscribe(() => {
+        const updateProduct = this.products.filter(p => p.id !== productId);
+        this.products = updateProduct;
+        this.productsUpdated.next([...this.products]);
+      });
+  }
 }
