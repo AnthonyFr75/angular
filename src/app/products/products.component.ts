@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Products } from "./products.model";
+import { Product, Products } from "./products.model";
+import { MatDialog } from '@angular/material/dialog';
+import { ModalContentProductComponent } from './modal-content-product/modal-content-product.component';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +21,7 @@ export class ProductsComponent implements OnInit {
   };
 
   public product2 = {
-    id: 121,
+    id: 127,
     name: 'StringStringString',
     type: 'StringString',
     phone: 'String',
@@ -31,8 +33,27 @@ export class ProductsComponent implements OnInit {
 
   public products: Products;
 
+  constructor(public dialog: MatDialog) {}
+
   public ngOnInit(): void {
     this.products = [this.product1, this.product2];
   }
 
+  public openDialog(data: {product: Product} | null): void {
+    const dialogRef = this.dialog.open(ModalContentProductComponent, {
+      width: '300px',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  public updateProduct(product: Product): void {
+    this.openDialog({product: product});
+  }
+
+  public deleteProduct(product: Product): void {
+    this.products = this.products.filter(p => p.id !== product.id)
+  }
 }

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Product } from '../products.model';
 
 @Component({
   selector: 'app-modal-content-product',
@@ -22,6 +24,13 @@ export class ModalContentProductComponent implements OnInit {
   public productKeys = Object.keys(this.productGroup.controls);
 
   public formvalid = true;
+
+  constructor(
+    public dialogRef: MatDialogRef<ModalContentProductComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {product: Product} | null) {
+      const product = data?.product;
+      product && this.productGroup.patchValue(product);
+  }
 
   public ngOnInit(): void {
     this.productGroup.valueChanges.subscribe(f => console.log(f))

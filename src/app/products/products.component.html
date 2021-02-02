@@ -1,4 +1,8 @@
 <div class="products-container">
-  <button mat-raised-button color="primary">Add Product</button>
-  <app-product-view [products]="products"></app-product-view>
+  <button mat-raised-button color="primary" (click)="openDialog(null)">Add Product</button>
+  <app-product-view
+    (update)="updateProduct($event)"
+    (delete)="deleteProduct($event)"
+    [products]="products">
+  </app-product-view>
 </div>

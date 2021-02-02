@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatRadioModule } from '@angular/material/radio';
     ModalContentProductComponent
   ],
   imports: [
+    MatDialogModule,
     MatRadioModule,
     ReactiveFormsModule,
     MatFormFieldModule,

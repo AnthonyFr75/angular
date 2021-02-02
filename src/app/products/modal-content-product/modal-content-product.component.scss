@@ -2,19 +2,28 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  align-items: center;
   .form-group {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    .title-radio {
-      font-size: 12px;
-      color: grey;
-    }
-    .radio-group {
-      padding-top: 8px;
+    align-items: center;
+    .radio-group-container {
       display: flex;
       flex-direction: row;
-      gap: 15px;
+      align-items: center;
+      gap: 10px;
+      .title-radio {
+        font-size: 12px;
+        color: grey;
+        height: 12px;
+      }
+      .radio-group {
+        padding-top: 8px;
+        display: flex;
+        flex-direction: row;
+        gap: 7px;
+      }
     }
   }
   .error-message {

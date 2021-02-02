@@ -1,4 +1,5 @@
 <div class="modal-content-product-container">
+  <div>Product</div>
   <div [formGroup]="productGroup" class=form-group>
     <div *ngFor="let productKey of productKeys">
       <div [ngSwitch]="productKey === 'available'">
